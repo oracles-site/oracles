@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORACLES — Observatoire associatif de recherche académique pour les études stratégiques</title>
+<meta name="description" content="ORACLES promeut, sensibilise et contribue à la recherche en études stratégiques : articles, revues d'actualité, chronologies de crise, fiches de méthodes et carte interactive.">
+<meta name="theme-color" content="#0B0B2E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ORACLES — Observatoire associatif de recherche académique pour les études stratégiques">
+<meta property="og:description" content="ORACLES promeut, sensibilise et contribue à la recherche en études stratégiques : articles, revues d'actualité, chronologies de crise, fiches de méthodes et carte interactive.">
+<meta property="og:image" content="https://observatoire-oracles.fr/assets/logo-oracles.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="accueil">
+<div id="site-header"></div>
+
+<main id="contenu">
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Promouvoir, sensibiliser et contribuer à la recherche en études stratégiques.</h1>
+    <p>ORACLES est une association qui forme à la recherche, accompagne les étudiants dans la production de travaux et développe des outils au service de la recherche et de la décision publique.</p>
+    <div class="hero-actions">
+      <a class="btn btn--plein" href="carte.html">Explorer la carte</a>
+      <a class="btn" href="articles.html">Lire les travaux</a>
+    </div>
+  </div>
+  <a class="hero-eye" href="carte.html" aria-label="Ouvrir la carte interactive de l'état de la littérature">
+    <img src="assets/hero-oeil.svg" alt="" width="900" height="540">
+  </a>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Notre mission</h2></div>
+  <div class="mission">
+    <div><h3>Promouvoir</h3><p>Faire connaître les études stratégiques comme champ de recherche à part entière et valoriser les travaux de jeunes chercheurs.</p></div>
+    <div><h3>Sensibiliser</h3><p>Rendre accessibles les grands enjeux de sécurité et de défense, les méthodes de la recherche et la lecture critique de l'actualité internationale.</p></div>
+    <div><h3>Contribuer</h3><p>Produire des travaux rigoureux, des fiches de lecture, des entretiens et des outils utiles à la recherche comme à la décision publique.</p></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap two-col">
+  <div>
+    <h2>Ce que nous proposons</h2>
+    <p>Quatre rubriques complémentaires, du travail de recherche à l'outil d'analyse, pensés pour apprendre en produisant.</p>
+  </div>
+  <ul class="formats">
+    <li><h3><a href="articles.html">Articles</a></h3><p>Travaux originaux d'étudiants et de chercheurs, et revues d'actualité internationale.</p></li>
+    <li><h3><a href="chronologies.html">Chronologie des crises</a></h3><p>Le déroulé détaillé d'une crise, phase par phase, avec ses acteurs.</p></li>
+    <li><h3><a href="methodes.html">Méthodes</a></h3><p>Comparer les méthodes de recherche pour choisir la plus adaptée à sa question.</p></li>
+    <li><h3><a href="carte.html">État de la littérature</a></h3><p>Carte interactive : fiches de lecture et entretiens avec des chercheurs, classés par zone.</p></li>
+  </ul>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Dernières publications</h2><a href="articles.html">Tous les travaux</a></div>
+  <ul class="works" id="latest"></ul>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <div><h2>Vous souhaitez rejoindre ORACLES ?</h2><p>Étudiant, chercheur ou simple curieux : écrivez-nous pour rejoindre l'association ou collaborer avec elle.</p></div>
+  <a class="btn btn--plein" id="mail-cta" href="#">Nous écrire</a>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/travaux.js"></script>
+<script src="js/main.js"></script>
+<script>document.getElementById("mail-cta").href="mailto:"+SITE.email+"?subject=Contact%20ORACLES";</script>
+</body>
+</html>

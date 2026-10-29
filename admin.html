@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace contributeur — ORACLES</title>
+<meta name="description" content="Espace d'administration.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0B2E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Administration — ORACLES">
+<meta property="og:description" content="Espace d'administration.">
+<meta property="og:image" content="https://observatoire-oracles.fr/assets/logo-oracles.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contributeur">
+<div id="site-header"></div>
+<div class="pagehead"><div class="wrap"><h1>Espace contributeur</h1><p>Accès réservé aux contributeurs autorisés. Travaux, revues d'actualité et chronologies sont mis en forme et publiés automatiquement.</p></div></div>
+
+<main id="contenu">
+<section class="section" id="adm-login"><div class="wrap">
+  <div class="adm-card login-card">
+    <h2>Connexion contributeur</h2>
+    <p class="hint" style="margin-bottom:.5rem">Connectez-vous avec votre compte GitHub. L'accès est vérifié par GitHub : seuls les comptes autorisés sur le dépôt du site peuvent publier.</p>
+    <form id="login-form" autocomplete="on">
+      <label for="c-user">Identifiant GitHub</label>
+      <input type="text" id="c-user" autocomplete="username" placeholder="votre-pseudo" required>
+      <label for="c-token">Jeton d'accès personnel (fait office de mot de passe)</label>
+      <input type="password" id="c-token" autocomplete="current-password" placeholder="github_pat_…" required>
+      <label class="check"><input type="checkbox" id="c-remember"> Rester connecté sur cet ordinateur</label>
+      <details class="adv"><summary>Options avancées</summary>
+        <label for="c-repo">Dépôt (propriétaire/nom)</label>
+        <input type="text" id="c-repo" placeholder="votrepseudo/oracles-site" autocomplete="off">
+        <label for="c-branch">Branche</label>
+        <input type="text" id="c-branch" value="main" autocomplete="off">
+      </details>
+      <div class="adm-actions"><button class="btn btn--plein" id="c-login" type="submit">Se connecter</button></div>
+      <div class="adm-msg" id="c-msg" role="alert" hidden></div>
+    </form>
+    <p class="hint" style="margin-top:1.2rem">Accès réservé aux contributeurs autorisés. Pour obtenir un accès, demandez au bureau d'ajouter votre compte GitHub au dépôt, puis créez votre jeton en suivant LISEZ-MOI.md.</p>
+  </div>
+</div></section>
+
+<section class="section" id="adm-app" hidden><div class="wrap">
+<div class="adm-bar"><span id="adm-user"></span><button class="btn" id="c-logout" type="button">Se déconnecter</button></div>
+<div class="adm-tabs" role="tablist" aria-label="Rubriques de l'espace contributeur">
+  <button type="button" role="tab" data-tab="travaux" aria-selected="true">Travaux</button>
+  <button type="button" role="tab" data-tab="revues" aria-selected="false">Revues d'actualité</button>
+  <button type="button" role="tab" data-tab="chronologies" aria-selected="false">Chronologies</button>
+  <button type="button" role="tab" data-tab="methodes" aria-selected="false">Méthodes</button>
+</div>
+<div class="adm-panel" id="tab-travaux" role="tabpanel">
+<div class="adm-grid">
+<div>
+  <div class="adm-card">
+    <h2 id="f-head">Nouveau travail</h2>
+    <div class="row">
+      <div><label for="f-type">Format</label><select id="f-type"></select></div>
+      <div><label for="f-zone">Zone</label><select id="f-zone"></select></div>
+    </div>
+    <label for="f-titre">Titre</label><input type="text" id="f-titre">
+    <div class="row">
+      <div><label for="f-auteur">Auteur·rice</label><input type="text" id="f-auteur"></div>
+      <div><label for="f-date">Date</label><input type="date" id="f-date"></div>
+    </div>
+    <label for="f-theme">Thème</label><input type="text" id="f-theme" placeholder="ex. Dissuasion nucléaire">
+    <label for="f-resume">Résumé</label><textarea id="f-resume" style="min-height:5rem;font-family:inherit"></textarea>
+    <p class="hint">Facultatif : s'il est vide, il est généré à partir du début du texte.</p>
+    <label for="f-file">Importer un fichier (Word .docx, Markdown, texte ou HTML)</label>
+    <input type="file" id="f-file" accept=".docx,.md,.markdown,.txt,.html,.htm">
+    <label for="f-text">Texte (Markdown accepté : # titre, ## intertitre, *italique*, **gras**, &gt; citation)</label>
+    <textarea id="f-text" placeholder="Collez ou rédigez le texte ici, ou importez un fichier ci-dessus."></textarea>
+    <div class="row">
+      <div><label for="f-pdf">Joindre un PDF (facultatif)</label><input type="file" id="f-pdf" accept="application/pdf,.pdf"></div>
+      <div><label for="f-url">Ou lien externe (HAL, blog…)</label><input type="text" id="f-url" placeholder="https://"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="f-actif" checked> Visible sur le site</label>
+    <div class="adm-actions">
+      <button class="btn btn--plein" id="f-publish" type="button">Publier sur le site</button>
+      <button class="btn" id="f-manual" type="button">Obtenir les fichiers (mode manuel)</button>
+      <button class="btn" id="f-cancel" type="button" hidden>Annuler la modification</button>
+    </div>
+    <div class="adm-msg" id="f-msg" hidden></div>
+    <div id="manual"></div>
+  </div>
+</div>
+<div>
+  <div class="adm-card"><h2>Aperçu du texte</h2><div class="preview article" id="preview"></div></div>
+  <div class="adm-card"><h2>Travaux publiés</h2><ul class="adm-list" id="list"></ul></div>
+</div>
+</div>
+</div>
+
+<div class="adm-panel" id="tab-revues" role="tabpanel" hidden>
+<div class="adm-grid">
+<div>
+  <div class="adm-card">
+    <h2 id="rv-head">Nouvelle revue d'actualité</h2>
+    <p class="hint" style="margin-bottom:.4rem">Renseignez la période, puis les faits marquants par zone. La page est mise en forme automatiquement : éditorial, sections par zone, sources et « À suivre ».</p>
+    <div class="row">
+      <div><label for="rv-debut">Début de la période</label><input type="date" id="rv-debut"></div>
+      <div><label for="rv-fin">Fin de la période</label><input type="date" id="rv-fin"></div>
+    </div>
+    <label for="rv-titre">Titre</label><input type="text" id="rv-titre">
+    <p class="hint">Pré-rempli avec le numéro de semaine ; vous pouvez le modifier.</p>
+    <div class="row">
+      <div><label for="rv-auteur">Auteur·rice</label><input type="text" id="rv-auteur" value="Équipe ORACLES"></div>
+      <div><label for="rv-date">Date de publication</label><input type="date" id="rv-date"></div>
+    </div>
+    <label for="rv-intro">Éditorial ou introduction (Markdown accepté)</label>
+    <textarea id="rv-intro" style="min-height:7rem;font-family:inherit" placeholder="Quelques lignes pour situer la semaine."></textarea>
+    <h3 style="margin-top:1.5rem">Faits marquants</h3>
+    <div id="rv-items"></div>
+    <div class="adm-actions"><button class="btn" id="rv-add" type="button">Ajouter un fait marquant</button></div>
+    <label for="rv-suivre">À suivre la semaine prochaine (Markdown accepté)</label>
+    <textarea id="rv-suivre" style="min-height:6rem;font-family:inherit" placeholder="- Sommet…&#10;- Échéance…"></textarea>
+    <label class="check"><input type="checkbox" id="rv-actif" checked> Visible sur le site</label>
+    <div class="adm-actions">
+      <button class="btn btn--plein" id="rv-publish" type="button">Publier la revue</button>
+      <button class="btn" id="rv-cancel" type="button" hidden>Annuler la modification</button>
+    </div>
+    <div class="adm-msg" id="rv-msg" hidden></div>
+  </div>
+</div>
+<div>
+  <div class="adm-card"><h2>Aperçu</h2><div class="preview article" id="rv-preview"></div></div>
+  <div class="adm-card"><h2>Revues publiées</h2><ul class="adm-list" id="rv-list"></ul></div>
+</div>
+</div>
+</div>
+
+<div class="adm-panel" id="tab-chronologies" role="tabpanel" hidden>
+<div class="adm-grid">
+<div>
+  <div class="adm-card">
+    <h2 id="ch-head">Nouvelle chronologie</h2>
+    <label for="ch-titre">Titre</label><input type="text" id="ch-titre" placeholder="ex. La crise de Suez (1956)">
+    <label for="ch-resume">Résumé</label><textarea id="ch-resume" style="min-height:5rem;font-family:inherit"></textarea>
+    <div class="row">
+      <div><label for="ch-acteurs">Acteurs (séparés par des virgules)</label><input type="text" id="ch-acteurs" placeholder="France, Royaume-Uni, Égypte"></div>
+      <div><label for="ch-auteur">Auteur·rice</label><input type="text" id="ch-auteur"></div>
+    </div>
+    <h3 style="margin-top:1.5rem">Événements</h3>
+    <p class="hint">Les événements s'affichent dans l'ordre ci-dessous : utilisez « Monter » et « Descendre » pour les réordonner.</p>
+    <div id="ch-events"></div>
+    <datalist id="ch-phases"></datalist>
+    <div class="adm-actions">
+      <button class="btn" id="ch-add" type="button">Ajouter un événement</button>
+      <button class="btn" id="ch-bulk-toggle" type="button">Coller une liste d'événements</button>
+    </div>
+    <div id="ch-bulk" hidden>
+      <label for="ch-bulk-text">Un événement par ligne : date | phase | titre | description</label>
+      <textarea id="ch-bulk-text" style="min-height:7rem" placeholder="22 oct. 1962 | Escalade | Discours de Kennedy | Annonce de la quarantaine navale."></textarea>
+      <div class="adm-actions"><button class="btn" id="ch-bulk-add" type="button">Ajouter ces événements</button></div>
+    </div>
+    <label class="check"><input type="checkbox" id="ch-actif" checked> Visible sur le site</label>
+    <div class="adm-actions">
+      <button class="btn btn--plein" id="ch-publish" type="button">Publier la chronologie</button>
+      <button class="btn" id="ch-cancel" type="button" hidden>Annuler la modification</button>
+    </div>
+    <div class="adm-msg" id="ch-msg" hidden></div>
+  </div>
+</div>
+<div>
+  <div class="adm-card"><h2>Aperçu</h2><div id="ch-preview"></div></div>
+  <div class="adm-card"><h2>Chronologies publiées</h2><ul class="adm-list" id="ch-list"></ul></div>
+</div>
+</div>
+</div>
+
+<div class="adm-panel" id="tab-methodes" role="tabpanel" hidden>
+<div class="adm-grid">
+<div>
+  <div class="adm-card">
+    <h2 id="mt-head">Nouvelle fiche méthode</h2>
+    <p class="hint" style="margin-bottom:.4rem">Chaque champ accepte le Markdown (listes avec « - » ou « 1. », **gras**, *italique*). Les sections vides ne sont pas affichées.</p>
+    <label for="mt-nom">Nom de la méthode</label><input type="text" id="mt-nom" placeholder="ex. Étude de cas">
+    <div class="row">
+      <div><label for="mt-niveau">Niveau de difficulté</label><select id="mt-niveau"><option value="1">1 : accessible dès la licence</option><option value="2">2 : demande un peu d'expérience</option><option value="3">3 : demande un accompagnement</option></select></div>
+      <div><label for="mt-auteur">Auteur·rice (facultatif)</label><input type="text" id="mt-auteur"></div>
+    </div>
+    <label for="mt-resume">En bref (une phrase)</label><input type="text" id="mt-resume" placeholder="À quelle question la méthode permet-elle de répondre ?">
+    <label for="mt-principe">Le principe</label>
+    <textarea id="mt-principe" style="min-height:9rem;font-family:inherit"></textarea>
+    <p class="hint">Expliquez en quelques paragraphes ce que fait la méthode et pourquoi.</p>
+    <label for="mt-etapes">Mise en œuvre (étapes)</label>
+    <textarea id="mt-etapes" style="min-height:7rem;font-family:inherit"></textarea>
+    <p class="hint">Liste numérotée : « 1. … », « 2. … ».</p>
+    <label for="mt-donnees">Données mobilisées</label>
+    <textarea id="mt-donnees" style="min-height:4rem;font-family:inherit"></textarea>
+    <label for="mt-forces">Forces</label>
+    <textarea id="mt-forces" style="min-height:5rem;font-family:inherit"></textarea>
+    <p class="hint">Une liste : « - … ».</p>
+    <label for="mt-limites">Limites</label>
+    <textarea id="mt-limites" style="min-height:5rem;font-family:inherit"></textarea>
+    <p class="hint">Une liste : « - … ».</p>
+    <label for="mt-exemple">Exemple d'usage</label>
+    <textarea id="mt-exemple" style="min-height:4rem;font-family:inherit"></textarea>
+    <label for="mt-lectures">Pour aller plus loin (références)</label>
+    <textarea id="mt-lectures" style="min-height:5rem;font-family:inherit"></textarea>
+    <p class="hint">Une référence par ligne, précédée de « - ».</p>
+    <label class="check"><input type="checkbox" id="mt-actif" checked> Visible sur le site</label>
+    <div class="adm-actions">
+      <button class="btn btn--plein" id="mt-publish" type="button">Publier la fiche</button>
+      <button class="btn" id="mt-cancel" type="button" hidden>Annuler la modification</button>
+    </div>
+    <div class="adm-msg" id="mt-msg" hidden></div>
+  </div>
+</div>
+<div>
+  <div class="adm-card"><h2>Aperçu</h2><div class="preview article" id="mt-preview"></div></div>
+  <div class="adm-card"><h2>Fiches publiées</h2><p class="hint" style="margin-bottom:.4rem">L'ordre ci-dessous est l'ordre d'affichage sur le site.</p><ul class="adm-list" id="mt-list"></ul></div>
+</div>
+</div>
+</div>
+</div></section></main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/travaux.js"></script>
+<script src="js/chronologies.js"></script>
+<script src="js/methodes.js"></script>
+<script src="js/vendor/purify.min.js"></script>
+<script src="js/vendor/marked.min.js"></script>
+<script src="js/vendor/mammoth.browser.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/admin-revues.js"></script>
+<script src="js/admin-chrono.js"></script>
+<script src="js/admin-methodes.js"></script>
+</body>
+</html>

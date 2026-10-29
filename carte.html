@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>État de la littérature — ORACLES</title>
+<meta name="description" content="Carte du monde interactive : fiches de lecture, entretiens et articles de chercheurs en études stratégiques, par zone.">
+<meta name="theme-color" content="#0B0B2E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="État de la littérature — ORACLES">
+<meta property="og:description" content="Carte du monde interactive : fiches de lecture, entretiens et articles de chercheurs en études stratégiques, par zone.">
+<meta property="og:image" content="https://observatoire-oracles.fr/assets/logo-oracles.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="carte">
+<div id="site-header"></div>
+<div class="pagehead"><div class="wrap"><h1>État de la littérature</h1><p>Carte interactive : sélectionnez une zone pour consulter les fiches de lecture, entretiens et articles qui lui sont consacrés.</p></div></div>
+
+<main id="contenu"><section class="section"><div class="wrap map-layout">
+  <div>
+    <div class="map-box" id="map-box"></div>
+    <div class="zone-buttons" id="zone-buttons" role="group" aria-label="Choisir une zone"></div>
+  </div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div></section></main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script>
+<script src="js/travaux.js"></script>
+<script src="js/main.js"></script>
+<script src="js/map-data.js"></script>
+<script src="js/zones-pays.js"></script>
+<script src="js/carte.js"></script>
+</body>
+</html>
